@@ -1,0 +1,136 @@
+{
+  "script_version": "1.0.0",
+  "script_sha256": "b0d98fb53b4278b8a7547884c91b83391e09cbdeb7e667f7330b029c25415bc1",
+  "run_at_utc": "2026-11-07T14:19:14.308759+00:00",
+  "bronze_file": "historical_2026-05-05_to_2026-11-05.parquet",
+  "bronze_sha256": "5fe30f7f0474d7e366e1233edc0cf321eb11029940acaf44254cd792e16866f3",
+  "row_count_in": 22775,
+  "row_count_out": 22775,
+  "rows_by_source": [
+    {
+      "source": "bluesky",
+      "len": 7026
+    },
+    {
+      "source": "x",
+      "len": 15749
+    }
+  ],
+  "rows_by_ticker": [
+    {
+      "ticker": "ADANIENT.NS",
+      "len": 273
+    },
+    {
+      "ticker": "ADANIPORTS.NS",
+      "len": 129
+    },
+    {
+      "ticker": "APOLLOHOSP.NS",
+      "len": 122
+    },
+    {
+      "ticker": "ASIANPAINT.NS",
+      "len": 129
+    },
+    {
+      "ticker": "AXISBANK.NS",
+      "len": 118
+    },
+    {
+      "ticker": "BAJAJ-AUTO.NS",
+      "len": 50
+    },
+    {
+      "ticker": "BTC-USD",
+      "len": 380
+    },
+    {
+      "ticker": "GC=F",
+      "len": 5
+    },
+    {
+      "ticker": "HCLTECH.NS",
+      "len": 2817
+    },
+    {
+      "ticker": "HDFCBANK.NS",
+      "len": 259
+    },
+    {
+      "ticker": "INFY.NS",
+      "len": 6772
+    },
+    {
+      "ticker": "TCS.NS",
+      "len": 9759
+    },
+    {
+      "ticker": "TECHM.NS",
+      "len": 1962
+    }
+  ],
+  "columns_kept": [
+    "rid",
+    "author_key",
+    "source",
+    "ticker",
+    "created_at",
+    "collected_at",
+    "text",
+    "has_url",
+    "lang",
+    "heuristic_relevant",
+    "sentiment_compound",
+    "sentiment_label",
+    "sentiment_method",
+    "engagement_score",
+    "like_count",
+    "repost_count",
+    "reply_count",
+    "quote_count",
+    "view_count",
+    "query"
+  ],
+  "columns_dropped": [
+    "uri",
+    "is_finance_relevant",
+    "post_json",
+    "author_handle",
+    "author_id",
+    "cid",
+    "author_did"
+  ],
+  "renamed_columns": {
+    "is_finance_relevant": "heuristic_relevant"
+  },
+  "schema": {
+    "rid": "String",
+    "author_key": "String",
+    "source": "String",
+    "ticker": "String",
+    "created_at": "Datetime(time_unit='us', time_zone='UTC')",
+    "collected_at": "Datetime(time_unit='us', time_zone='UTC')",
+    "text": "String",
+    "has_url": "Boolean",
+    "lang": "String",
+    "heuristic_relevant": "Boolean",
+    "sentiment_compound": "Float64",
+    "sentiment_label": "String",
+    "sentiment_method": "String",
+    "engagement_score": "Int64",
+    "like_count": "Int64",
+    "repost_count": "Int64",
+    "reply_count": "Int64",
+    "quote_count": "Int64",
+    "view_count": "Int64",
+    "query": "String"
+  },
+  "unknown_author_rows": 210,
+  "unknown_author_policy": "Per-post key; cannot group these rows as a known author",
+  "id_method": "HMAC-SHA256 with domain-separated JSON identities; source-scoped authors",
+  "text_cleaning": "Email, HTTP(S)/www URL, >=7-digit phone candidate, then @mention masking",
+  "checks_passed": true,
+  "silver_file": "silver_2026-11-07T141914308759Z_5b61e195.parquet",
+  "silver_sha256": "182d789ca67571762a8f23f2c98c98468df324d011091b2daec937647e1661a1"
+}
