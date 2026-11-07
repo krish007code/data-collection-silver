@@ -1,0 +1,33 @@
+TASK: Label social-media posts as finance-related or not, using the definition below. Do this by reading each post yourself and judging its meaning. Do NOT write a keyword, regex or rule-based classifier and do NOT train a model, because I am measuring how well your own judgement matches a human's. You may use code only to read the input file and write the results, never to decide the labels.\
+\
+DEFINITION (use exactly this, do not reword or extend it):\
+A post is finance-related if its text makes a claim, asks a question, reports an event, or expresses a view about a financial asset or market, an investment or borrowing decision, a company's financial performance or financing, or a financial indicator such as an interest rate.\
+\
+HOW TO APPLY IT:\
+\- Judge only from the post text. You have no information about prices or market movements and must not look any up.\
+\- Posts in English, Hindi, or mixed Hindi-English all count; judge by meaning.\
+\- True examples: questions like "should I buy this stock?", price or target claims, earnings or results news, opinions about the market, interest-rate comments, tip posts that claim a stock will rise.\
+\- False examples: job openings or hiring, layoffs or workplace complaints, product or service announcements with no financial claim, a keyword used with a different meaning, jokes or chat with no financial content.\
+\- Posts about controversies, lawsuits, scandals, or social or political events involving a company are False, unless the text links the event to the company's stock price, finances, investors, financing, or business results. Judge the topic only; do not use whether the post is positive or negative.\
+\- If a post is borderline, choose the closer label. Do not add any other column.\
+\- Do not skip any post, do not merge posts, and keep one row per input row.\
+\
+INPUT: [PATH TO THE INPUT PARQUET FILE]\
+\- Use ONLY the columns "rid" and "text". If the file has any other columns (for example a relevance flag or a sentiment score), ignore them completely and do not use them to decide a label.\
+\
+RULES ABOUT FILES:\
+\- Read only the input Parquet file. Do NOT open, read, or search for any file whose name contains "human", "label", "gold", or "sample_master", and do not look at any other labels.\
+\- Do not modify any existing file. Write only the new files named below.\
+\
+OUTPUT:\
+1\. A Parquet file named llm_v2_results.parquet with exactly two columns: "rid" (string, copied unchanged from the input) and "llm_v2" (boolean: True if finance-related, False if not). One row per input row, in the same order as the input.\
+2\. A text file prompts/v2.txt that contains this entire prompt, verbatim, so I can record which version was used.\
+\
+PROCESS:\
+\- Work through the posts in batches of 25 and save your progress as you go.\
+\- When finished, check that: the number of output rows equals the number of input rows; every rid appears exactly once and matches the input; llm_v2 contains only True or False; there are no nulls; the file has exactly the two columns named above.\
+\- Then report only: total rows, number labelled True, number labelled False, and the result of each check above. Do not print any post text in the report.\
+\- If any check fails, fix it and re-run the check before reporting.\
+\- State which model or agent you are, as far as you know it. If you do not know, write "unknown".
+
+[https://github.com/krish007code/data-collection-silver](https://github.com/krish007code/data-collection-silver)
